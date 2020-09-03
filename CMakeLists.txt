@@ -6,7 +6,13 @@ pkg_check_modules(libusb-1.0 REQUIRED libusb-1.0)
 
 include_directories(include ${libusb-1.0_INCLUDEDIR})
 
-set(SPI_MEM_SRCS spi-mem/spi-mem.c spi-mem/spi-mem-fx2qspi.c)
+set(SPI_MEM_SRCS
+	spi-mem/spi-mem.c
+	spi-mem/spi-mem-drvs.c
+	spi-mem/spi-mem-fx2qspi.c
+	spi-mem/spi-mem-serprog.c
+)
+
 set(SPI_NAND_SRCS
 	spi-nand/core.c
 	spi-nand/gigadevice.c

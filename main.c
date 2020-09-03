@@ -13,14 +13,14 @@ static size_t length = 0;
 static const char *drv = "fx2qspi";
 static const char *drvarg = NULL;
 static const struct option long_opts[] = {
-	{"no-ecc", no_argument, &no_ecc, 1},
-	{"with-oob", no_argument, &with_oob, 1},
-	{"erase-rest", no_argument, &erase_rest, 1},
-	{"offset", required_argument, NULL, 'o'},
-	{"length", required_argument, NULL, 'l'},
-	{"driver", required_argument, NULL, 'd'},
-	{"driver-arg", required_argument, NULL, 'a'},
-	{0, 0, NULL, 0},
+	{ "no-ecc", no_argument, &no_ecc, 1 },
+	{ "with-oob", no_argument, &with_oob, 1 },
+	{ "erase-rest", no_argument, &erase_rest, 1 },
+	{ "offset", required_argument, NULL, 'o' },
+	{ "length", required_argument, NULL, 'l' },
+	{ "driver", required_argument, NULL, 'd' },
+	{ "driver-arg", required_argument, NULL, 'a' },
+	{ 0, 0, NULL, 0 },
 };
 
 int main(int argc, char *argv[])
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	mem = fx2qspi_probe();
+	mem = spi_mem_probe(drv, drvarg);
 	if (!mem) {
 		fprintf(stderr, "device not found.\n");
 		return -1;
@@ -118,6 +118,6 @@ int main(int argc, char *argv[])
 CLEANUP2:
 	spinand_remove(snand);
 CLEANUP1:
-	fx2qspi_remove(mem);
+	spi_mem_remove(drv, mem);
 	return ret;
 }
