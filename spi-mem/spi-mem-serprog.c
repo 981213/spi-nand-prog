@@ -145,9 +145,31 @@ static int serprog_exec_op(u8 command, u32 parmlen, u8 *params,
 	return 0;
 }
 
+static int serprog_get_cmdmap(u32 *cmdmap)
+{
+	u8 buf[32];
+
+	if (serprog_exec_op(S_CMD_Q_CMDMAP, 0, NULL, 32, buf) < 0)
+		return -EINVAL;
+
+	*cmdmap = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
+	return 0;
+}
+
 static int serprog_set_spi_speed(u32 speed)
 {
 	u8 buf[4];
+	u32 cmdmap = 0;
+	int ret;
+
+	ret = serprog_get_cmdmap(&cmdmap);
+	if (ret < 0)
+		return ret;
+
+	if (!(cmdmap & (1 << S_CMD_S_SPI_FREQ))) {
+		printf("serprog: programmer do not support set SPI clock freq.\n");
+		return 0;
+	}
 
 	buf[0] = speed & 0xff;
 	buf[1] = (speed >> (1 * 8)) & 0xff;
