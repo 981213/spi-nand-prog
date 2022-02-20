@@ -722,6 +722,8 @@ int spinand_match_and_init(struct spinand_device *spinand,
 					       info->op_variants.update_cache);
 		spinand->op_templates.update_cache = op;
 
+		printf("Found SPI NAND model: %s\n", table[i].model);
+
 		return 0;
 	}
 
