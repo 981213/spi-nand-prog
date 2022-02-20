@@ -30,7 +30,7 @@ add the following arguments to select this driver:
 ```
 spi-nand-prog <operation> [file name] [arguments]
 
-Operations: read/write/erase
+Operations: read/write/erase/scan
 Arguments:
  -d <driver>: hardware driver to be used.
  -a <arg>: additional argument provided to current driver.
