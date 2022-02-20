@@ -282,10 +282,12 @@ void snand_scan_bbm(struct spinand_device *snand)
 	struct nand_pos pos;
 	nanddev_offs_to_pos(nand, 0, &pos);
 	while (offs < flash_size) {
+		printf("scaning block %u\r", pos.eraseblock);
 		if (snand_isbad(snand, &pos, 0, 0))
-			printf("target %u block %u is bad.\n", pos.target,
+			printf("\ntarget %u block %u is bad.\n", pos.target,
 			       pos.eraseblock);
 		nanddev_pos_next_eraseblock(nand, &pos);
 		offs += eb_size;
 	}
+	printf("\ndone.\n");
 }

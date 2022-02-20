@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 		fpath = argv[optind + 1];
 		break;
 	case 'e':
+	case 's':
 		break;
 	default:
 		puts("unknown operation.");
@@ -110,6 +111,9 @@ int main(int argc, char *argv[])
 		break;
 	case 'e':
 		snand_write(snand, offs, false, false, true, NULL, 0, 0, 0, 0);
+		break;
+	case 's':
+		snand_scan_bbm(snand);
 		break;
 	}
 	fclose(fp);
