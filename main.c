@@ -116,7 +116,8 @@ int main(int argc, char *argv[])
 		snand_scan_bbm(snand);
 		break;
 	}
-	fclose(fp);
+	if (fp)
+		fclose(fp);
 
 CLEANUP2:
 	spinand_remove(snand);
