@@ -14,7 +14,7 @@ A SPI-NAND flash programmer software botched together using SPI-MEM and SPI-NAND
 
 ## Supported devices
 
-[981213/fx2qspi](https://github.com/981213/fx2qspi)
+[WCH CH347](https://www.wch.cn/products/CH347.html)
 
 The default driver. No extra arguments needed. 
 

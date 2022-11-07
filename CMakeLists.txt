@@ -11,6 +11,8 @@ set(SPI_MEM_SRCS
 	spi-mem/spi-mem-drvs.c
 	spi-mem/spi-mem-fx2qspi.c
 	spi-mem/spi-mem-serprog.c
+	spi-mem/ch347/ch347.c
+	spi-mem/ch347/spi-mem.c
 )
 
 set(SPI_NAND_SRCS

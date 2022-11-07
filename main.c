@@ -10,7 +10,7 @@ static int with_oob = 0;
 static int erase_rest = 0;
 static size_t offs = 0;
 static size_t length = 0;
-static const char *drv = "fx2qspi";
+static const char *drv = "ch347";
 static const char *drvarg = NULL;
 static const struct option long_opts[] = {
 	{ "no-ecc", no_argument, &no_ecc, 1 },
