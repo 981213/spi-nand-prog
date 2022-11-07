@@ -89,7 +89,7 @@ struct spi_mem *ch347_probe() {
     ret = ch347_setup_spi(priv, 3, false, false, false);
     if (ret)
         return false;
-    int freq = 15000;
+    int freq = 30000;
     ch347_mem.drvpriv = priv;
     ret = ch347_set_spi_freq(priv, &freq);
     return ret ? NULL : &ch347_mem;
