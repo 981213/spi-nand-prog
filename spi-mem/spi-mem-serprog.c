@@ -284,7 +284,7 @@ static const struct spi_controller_mem_ops _serprog_mem_ops = {
 static struct spi_mem _serprog_mem = {
 	.ops = &_serprog_mem_ops,
 	.spi_mode = 0,
-	.name = "fx2qspi",
+	.name = "serprog",
 	.drvpriv = NULL,
 };
 
