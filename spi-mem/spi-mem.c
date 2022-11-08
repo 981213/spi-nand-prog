@@ -157,7 +157,7 @@ int spi_mem_exec_op(struct spi_mem *mem, const struct spi_mem_op *op)
 	if (!spi_mem_internal_supports_op(mem, op))
 		return -EOPNOTSUPP;
 
-	ret = mem->ops->exec_op(mem, op);
+	return mem->ops->exec_op(mem, op);
 }
 
 /**
