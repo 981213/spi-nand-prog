@@ -25,10 +25,9 @@ static const struct option long_opts[] = {
 
 int main(int argc, char *argv[])
 {
-	u8 buf[4];
 	int ret = 0;
 	const char *fpath = NULL;
-	FILE *fp;
+	FILE *fp = NULL;
 	char opt;
 	int long_optind = 0;
 	int left_argc;

@@ -4,6 +4,8 @@ project(${EXE_NAME} C)
 find_package(PkgConfig)
 pkg_check_modules(libusb-1.0 REQUIRED libusb-1.0)
 
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -ggdb -Wall")
+
 include_directories(include ${libusb-1.0_INCLUDEDIR})
 
 set(SPI_MEM_SRCS

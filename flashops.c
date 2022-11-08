@@ -66,7 +66,6 @@ bool snand_isbad(struct spinand_device *snand, const struct nand_pos *pos,
 {
 	struct nand_device *nand = spinand_to_nand(snand);
 	size_t page_size = nanddev_page_size(nand);
-	size_t oob_size = nanddev_per_page_oobsize(nand);
 	struct nand_page_io_req req;
 	size_t i;
 
@@ -106,10 +105,7 @@ int snand_markbad(struct spinand_device *snand, const struct nand_pos *pos,
 {
 	struct nand_device *nand = spinand_to_nand(snand);
 	size_t page_size = nanddev_page_size(nand);
-	size_t oob_size = nanddev_per_page_oobsize(nand);
 	struct nand_page_io_req req;
-	size_t i;
-
 	u8 marker[8];
 	if (bbm_len > 8) {
 		fprintf(stderr, "bbm too long.\n");
@@ -142,18 +138,16 @@ int snand_erase_remark(struct spinand_device *snand, const struct nand_pos *pos,
 		       size_t old_bbm_offs, size_t old_bbm_len, size_t bbm_offs,
 		       size_t bbm_len)
 {
-	struct nand_device *nand = spinand_to_nand(snand);
-	size_t page_size = nanddev_page_size(nand);
 	int ret;
 	if (snand_isbad(snand, pos, old_bbm_offs, old_bbm_len)) {
-		printf("bad block: target %lu block %lu.\n", pos->target,
+		printf("bad block: target %u block %u.\n", pos->target,
 		       pos->eraseblock);
 		goto BAD_BLOCK;
 	}
 
 	ret = spinand_erase(snand, pos);
 	if (ret) {
-		printf("erase failed: target %lu block %lu. ret: %d\n",
+		printf("erase failed: target %u block %u. ret: %d\n",
 		       pos->target, pos->eraseblock, ret);
 		goto BAD_BLOCK;
 	}
@@ -282,16 +276,14 @@ int snand_write(struct spinand_device *snand, size_t offs, bool ecc_enabled,
 void snand_scan_bbm(struct spinand_device *snand)
 {
 	struct nand_device *nand = spinand_to_nand(snand);
-	size_t page_size = nanddev_page_size(nand);
 	size_t eb_size = nanddev_eraseblock_size(nand);
 	size_t flash_size = nanddev_size(nand);
 	size_t offs = 0;
 	struct nand_pos pos;
-	int ret;
 	nanddev_offs_to_pos(nand, 0, &pos);
 	while (offs < flash_size) {
 		if (snand_isbad(snand, &pos, 0, 0))
-			printf("target %lu block %lu is bad.\n", pos.target,
+			printf("target %u block %u is bad.\n", pos.target,
 			       pos.eraseblock);
 		nanddev_pos_next_eraseblock(nand, &pos);
 		offs += eb_size;

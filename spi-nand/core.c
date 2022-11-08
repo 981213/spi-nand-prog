@@ -834,7 +834,6 @@ static int spinand_init(struct spinand_device *spinand)
 		goto err_manuf_cleanup;
 	return 0;
 
-err_cleanup_nanddev:
 err_manuf_cleanup:
 	spinand_manufacturer_cleanup(spinand);
 
@@ -846,8 +845,6 @@ err_free_bufs:
 
 static void spinand_cleanup(struct spinand_device *spinand)
 {
-	struct nand_device *nand = spinand_to_nand(spinand);
-
 	spinand_manufacturer_cleanup(spinand);
 	free(spinand->databuf);
 	free(spinand->scratchbuf);
@@ -867,11 +864,6 @@ struct spinand_device *spinand_probe(struct spi_mem *mem)
 	if (ret)
 		return NULL;
 	return spinand;
-
-err_spinand_cleanup:
-	spinand_cleanup(spinand);
-
-	return NULL;
 }
 
 void spinand_remove(struct spinand_device *spinand)

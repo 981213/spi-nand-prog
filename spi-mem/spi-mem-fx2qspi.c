@@ -155,7 +155,6 @@ struct spi_mem *fx2qspi_probe()
 {
 	int ret;
 	fx2qspi_priv *priv = &_priv;
-	struct libusb_config_descriptor *cdesc;
 
 	ret = libusb_init(&priv->ctx);
 	if (ret < 0) {

@@ -177,8 +177,6 @@ int spi_mem_exec_op(struct spi_mem *mem, const struct spi_mem_op *op)
  */
 int spi_mem_adjust_op_size(struct spi_mem *mem, struct spi_mem_op *op)
 {
-	size_t len;
-
 	if (mem->ops->adjust_op_size)
 		return mem->ops->adjust_op_size(mem, op);
 

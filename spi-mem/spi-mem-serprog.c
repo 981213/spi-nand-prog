@@ -126,7 +126,6 @@ static int serprog_check_ack()
 static int serprog_exec_op(u8 command, u32 parmlen, u8 *params,
 		    u32 retlen, void *retparms)
 {
-	unsigned char c;
 	if (write(serial_fd, &command, 1) < 0) {
 		perror("serprog: exec_op: write cmd");
 		return errno;
@@ -149,7 +148,6 @@ static int serprog_exec_op(u8 command, u32 parmlen, u8 *params,
 static int serprog_set_spi_speed(u32 speed)
 {
 	u8 buf[4];
-	int i;
 
 	buf[0] = speed & 0xff;
 	buf[1] = (speed >> (1 * 8)) & 0xff;
@@ -177,7 +175,7 @@ static int serprog_adjust_op_size(struct spi_mem *mem, struct spi_mem_op *op)
 
 static int serprog_mem_exec_op(struct spi_mem *mem, const struct spi_mem_op *op)
 {
-	size_t tr_cnt = 1, i;
+	size_t i;
 	u32 wrlen, rdlen, tmp;
 	u8 buf[10];
 	ssize_t rwdone, rwpending, rwsize;
