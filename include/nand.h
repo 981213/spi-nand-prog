@@ -17,6 +17,10 @@
 #include <errno.h>
 #include <linux-types.h>
 
+#ifdef _WIN32
+#define __always_inline	inline __attribute__((__always_inline__))
+#endif
+
 #define do_div(n,base) ({					\
 	uint32_t __base = (base);				\
 	uint32_t __rem;						\

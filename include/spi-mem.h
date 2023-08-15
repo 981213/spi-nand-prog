@@ -18,7 +18,11 @@
 #include <linux-types.h>
 #include <linux-err.h>
 
+#ifdef _WIN32
+typedef intptr_t ssize_t;
+#else
 typedef long ssize_t;
+#endif
 struct spi_controller_mem_ops;
 
 #define SPI_MEM_OP_CMD(__opcode, __buswidth)			\

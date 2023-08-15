@@ -13,7 +13,6 @@
 extern "C" {
 #endif
 
-#include <endian.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <libusb-1.0/libusb.h>
